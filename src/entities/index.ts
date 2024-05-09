@@ -1,0 +1,6 @@
+export { default as Team } from './Team'
+export { default as Sherrin } from './Sherrin'
+export { default as PersonName } from './PersonName'
+export { default as Player } from './Player'
+export { default as BehindPost } from './BehindPost'
+export { default as GoalPost } from './GoalPost'

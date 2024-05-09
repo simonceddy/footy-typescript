@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{$title}}</title>
+  <style>
+    html, body, #root {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #root {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #container {
+      width: 100%;
+      height: 92%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #header {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 8%;
+      color: purple;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    #header-home-team-location, #header-away-team-location {
+      margin-right: 0.33rem;
+    }
+    #header-home-team-location, #header-away-team-location, #header-home-team-name, #header-away-team-name {
+      font-size: x-large;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body, #root {
+        background-color: black;
+        color: cyan;
+      }
+
+      #header {
+        color: pink;
+      }
+    }
+
+    #header-vs {
+      font-size:medium;
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
+    
+    .header-team-name {
+      font-style: italic;
+    }
+
+    .playing-list {
+      text-transform: capitalize;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .playing-list > span {
+      margin-bottom: 0.25rem;
+      margin-top: 0.25rem;
+    }
+
+    .player-name {
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div id="header">
+      {{$heading}}
+    </div>
+    <div id="container">
+      {{$body}}
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
