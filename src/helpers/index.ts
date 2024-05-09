@@ -11,6 +11,7 @@ export function randomVal (arr: string[]): string {
 export function randomUnusedVal (arr: string[], used: Array<string | null | undefined> = []): string {
   let val: string = randomVal(arr)
 
+  // TODO avoid potential infinite loops
   while (used.includes(val)) {
     val = randomVal(arr)
   }
@@ -18,6 +19,7 @@ export function randomUnusedVal (arr: string[], used: Array<string | null | unde
   return val
 }
 
+// TODO remove this pointless wrapper and just use lodash random directly
 export function rand (min: number, max: number, floating: boolean = false): number {
   return random(min, max, floating)
 }
