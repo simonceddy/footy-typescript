@@ -1,5 +1,6 @@
-public/*.js
+public
 server
 webpack.*
 .eslintrc.js
 client
+build
