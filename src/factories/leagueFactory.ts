@@ -1,5 +1,5 @@
 import PlayingList from '../collections/PlayingList'
-import { generateNumbers, randomUnusedVal } from '../helpers'
+import { generateNumbers, randomUnusedVal, randomVal } from '../helpers'
 import { type Team, type League as LeagueType } from '../types/entities'
 import { type LeagueFactoryAttributes, type LeagueFactoryOptions } from '../types/factories'
 import playerFactory from './playerFactory'
@@ -10,6 +10,10 @@ import League from '../entities/League'
 
 const nicknames = loadCSVResource('nicknames')
 const teamNames = loadCSVResource('teamNames')
+
+const leagueSuffixes = [
+  'cup', 'premiership', 'premiership season', 'championship', 'league', 'trophy', 'prize', 'contest', 'sports league'
+]
 
 export default function leagueFactory (
   attributes?: LeagueFactoryAttributes,
@@ -45,7 +49,7 @@ export default function leagueFactory (
       teamLists[team.location] = teamList
     }
   }
-  const name = attributes?.name ?? `${randomUnusedVal([...nicknames, ...teamNames], Object.values(teams).map((team) => team.name))} Cup`
+  const name = attributes?.name ?? `${randomUnusedVal([...nicknames, ...teamNames], Object.values(teams).map((team) => team.name))} ${randomVal(leagueSuffixes)}`
 
   return new League(
     name,

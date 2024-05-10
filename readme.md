@@ -79,6 +79,8 @@ The client currently only includes pages for viewing generated matchups and leag
 
 ## Adding data to name generators
 
+One of the funnest things this weird app does is generate random names and luckily for everyone it is easy to add to the data pool.
+
 Data for name generation is located in the `resources` directory. Each type of data has its own CSV file:
 
 - `firstNames.csv` - data for generating player first names
