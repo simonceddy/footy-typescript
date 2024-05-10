@@ -22,6 +22,7 @@ Current features include:
 ## Future Goals
 
 - Make the simulation take into account player attributes when determining next actions
+- Improvements and additions to actions
 - Simulate entity movement around the playing field
 - Give player entities awareness of their position on the playing field and factor this into determining next actions
 - Implement match state awareness e.g. how far in front/behind a players team is
@@ -81,12 +82,15 @@ The client currently only includes pages for viewing generated matchups and leag
 Data for name generation is located in the `resources` directory. Each type of data has its own CSV file:
 
 - `firstNames.csv` - data for generating player first names
+- `groundNames.csv` - data for generating stadium moniker e.g stadium, oval, ground, etc
 - `locations.csv` - data for generating team and ground locations
 - `nicknames.csv` - data for generating player nicknames
 - `surnames.csv` - data for generating player surnames
 - `teamNames.csv` - data for generating team monikers
 
-Currently the `groundNames.csv` file is not used, although will likely be readded in the future. This file features names that could be used in place of 'stadium', e.g. Docklands Stadium could become Docklands Oval
+League names are currently generated from nicknames or team names.
+
+Stadium names are generated from either a given team's location, nickname or team name data, or a generated first name + surname. E.g. Ogdenville Oval, Gazza Stadium, or George Orwell Football Ground
 
 CSV files make it very easy to add your own data. Just separate each new entry with a comma.
 

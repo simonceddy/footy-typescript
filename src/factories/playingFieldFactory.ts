@@ -13,16 +13,7 @@ const locations = loadCSVResource('locations')
 const firstNames = loadCSVResource('firstNames')
 const surnames = loadCSVResource('surnames')
 
-const stadiumNames = [
-  'stadium',
-  'cricket ground',
-  'field',
-  'park',
-  'bowl',
-  'arena',
-  'oval',
-  'dome'
-]
+const stadiumNames = loadCSVResource('groundNames')
 
 function generatePlayingFieldName (location?: string): string {
   const roll = rand(1, 3)
