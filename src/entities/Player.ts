@@ -24,7 +24,7 @@ export default class Player implements PlayerType {
     return this.name.firstName
   }
 
-  get nickname (): string | string[] | null {
+  get nickname (): string | string[] | undefined {
     return this.name.nickname
   }
 }

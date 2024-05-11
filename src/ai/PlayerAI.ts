@@ -147,8 +147,10 @@ export default class PlayerAI implements PlayerAIType {
 
   getOpponent (position?: string): Player {
     const pos1 = this.ownPosition
+    // TODO
     if (pos1 === null) {
-      throw new Error(`${this.player.name.toString(true)} has no current position`)
+      // throw new Error(`${this.player.name.toString(true)} has no current position`)
+      return this.getRandomPlayer()
     }
     const opponentPos = getOpposingPosition(pos1)
     const possibleOpponents = this.getCloseTargetsTo(opponentPos)
@@ -161,8 +163,10 @@ export default class PlayerAI implements PlayerAIType {
 
   getTarget (close: boolean = false): Player {
     const ownPos = this.ownPosition
+    // TODO
     if (ownPos === null) {
-      throw new Error(`${this.player.name.toString(true)} has no current position`)
+      // throw new Error(`${this.player.name.toString(true)} has no current position`)
+      return this.getRandomPlayer()
     }
     let targetPos: string
     if (close) {
@@ -178,5 +182,14 @@ export default class PlayerAI implements PlayerAIType {
       ? this.simulation.matchup.awayTeamContainer.positionMap[targetPos]
       : this.simulation.matchup.homeTeamContainer.positionMap[targetPos]
     return target
+  }
+
+  getRandomPlayer (): Player {
+    const allOnfieldPlayers = [
+      ...Object.values(this.simulation.matchup.homeTeamContainer.positionMap),
+      ...Object.values(this.simulation.matchup.awayTeamContainer.positionMap)
+    ]
+
+    return allOnfieldPlayers[Math.floor(Math.random() * allOnfieldPlayers.length)]
   }
 }

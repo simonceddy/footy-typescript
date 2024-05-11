@@ -22,7 +22,7 @@ export default class Mark implements Action {
     // TODO put logic here
     // determine if contested mark
     this.eventEmitter.emit(this.name, this.simulation, this.player)
-    console.log(`marked by ${this.player.name.toString(true)}`)
+    // console.log(`marked by ${this.player.name.toString(true)}`, this.player)
     return new GainPossession(this.simulation, this.player, true)
   }
 }

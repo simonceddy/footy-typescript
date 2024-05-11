@@ -48,6 +48,7 @@ export default function teamFactory (
   options: TeamFactoryOptions | undefined = undefined
 ): Team {
   const id = uuidv4()
+  // TODO clean up this
   const location = attributes !== undefined && typeof attributes.location === 'string'
     ? attributes.location
     : getUniqueLocation(
@@ -63,9 +64,13 @@ export default function teamFactory (
     location,
     name,
     null,
-    teamColoursFactory(),
+    teamColoursFactory(
+      attributes?.colour1,
+      attributes?.colour2,
+      attributes?.colour3
+    ),
     playingFieldFactory({
-      location: rand(0, 2) === 1 ? location : undefined
+      location: attributes?.location ?? (rand(0, 2) === 1 ? location : undefined)
     })
   )
 }

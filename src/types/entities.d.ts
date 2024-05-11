@@ -4,7 +4,7 @@ import { type PlayingField } from './geometry'
 export interface PersonName {
   firstName: string
   surname: string
-  nickname: null | string | string[]
+  nickname?: | string | string[]
   toString: (noNickname?: boolean) => string
 }
 

@@ -40,7 +40,7 @@ export default function leagueFactory (
         takenNicknames: [...teamList.players]
           .filter((player) => player.name.nickname !== null)
           .map((player) => {
-            if (player.name.nickname === null) return ''
+            if (player.name.nickname === undefined) return ''
             if (typeof player.name.nickname === 'string') return player.name.nickname
             return player.name.nickname[0]
           })

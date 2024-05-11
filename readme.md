@@ -10,6 +10,7 @@ Current features include:
 
 - Factories for generating players, teams, matchups and leagues
 - Basic simulation based entirely on RNG
+- Basic simulations from user submitted matchups
 - Express server with API routes for factories, match simulation, and setup for a simple [react client](https://github.com/simonceddy/footy-client)
 
 ## Current Issues
@@ -21,6 +22,7 @@ Current features include:
 - The basis for a coordinates system for moving entities is in place but is currently not implemented. At present all entities stay in the same locations
 - The duration of actions is currently handled by the simulation event loop and each tick of the clock is a constant amount. This means that currently a hitout takes the same amount of time as a set shot for goal.
 - Generation of attributes and position determination is rudimentary and often results in poor distribution of positions
+- Still some bugs with simulating user submitted matchups
 - Various poorly optimised code and typescript rookie mistakes
 
 ## Future Goals
@@ -34,10 +36,10 @@ Current features include:
 - Alter how time elapses so that actions determine their own durations. This should allow for stopped clock situations and hopefully sort out some of the issues with unrealistic numbers
 - Better attributes generation and position determination, likely including changes to valid attributes
 - Ability to set certain config via dot file like .env
-- Ability to run simulation from submitted matchups
 - Add some algorithmic name generation instead of solely using static data
 - Use better caching for data used by generators
 - Pseudo parallel action generation and handling ideally allowing individual entities to have their own actions and thus move around the xy grid
+- Schema route for user submitted matchup object
 - General improvements and optimisations
 - Better typescripting as I learn more
 

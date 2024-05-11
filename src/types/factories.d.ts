@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 // import { type Attribute } from './attributes'
-import { type Team } from './entities'
+import { type Player, type Team } from './entities'
+import { type PlayingField } from './geometry'
 
 export interface TeamFactoryAttributes {
   teamName?: string | undefined
   location?: string | undefined
   shorthand?: string | undefined
+  homeground?: PlayingField
+  colour1?: string
+  colour2?: string
+  colour3?: string
 }
 
 export interface TeamFactoryOptions {
@@ -50,13 +55,25 @@ export interface PlayingFieldFactoryAttributes {
   location?: string
 }
 
+export interface PlayingListFactoryAttributes {
+  team?: Team
+  players?: Player[]
+}
+
+export interface PlayingListFactoryOptions {
+  totalPlayers: number
+}
+
 export interface MatchupFactoryAttributes extends
-  PlayingFieldFactoryAttributes,
   PlayerAttributesFactoryAttributes,
   PlayerFactoryAttributes,
-  PersonNameFactoryAttributes,
-  TeamFactoryAttributes
-{}
+  PersonNameFactoryAttributes {
+  homeTeamAttributes?: TeamFactoryAttributes
+  awayTeamAttributes?: TeamFactoryAttributes
+  homePlayingList?: Player[]
+  awayPlayingList?: Player[]
+  playingFieldAttributes?: PlayingFieldFactoryAttributes
+}
 
 export interface MatchupFactoryOptions extends
   PlayerAttributeFactoryOptions,

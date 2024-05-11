@@ -6,7 +6,7 @@ export default class PlayerName implements PersonName {
 
   surname: string
 
-  nickname: null | string | string[]
+  nickname?: string | string[]
 
   constructor (firstName: string, surname: string, nickname: null | string | string[] = null) {
     this.firstName = firstName
@@ -23,7 +23,7 @@ export default class PlayerName implements PersonName {
     if (!noNickname && this.nickname !== null) {
       if (typeof this.nickname === 'string') {
         name += ` "${this.nickname}"`
-      } else {
+      } else if (this.nickname !== undefined) {
         name += ` ${this.nickname[randomKey(this.nickname)]}`
       }
     }

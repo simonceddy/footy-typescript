@@ -31,6 +31,7 @@ export interface PlayerAI {
   getTarget: (close?: boolean) => Player
   canScore: () => boolean
   getOpponent: (position?: string) => Player
+  getRandomPlayer: () => Player
 }
 
 export interface PlayerVisionAI {

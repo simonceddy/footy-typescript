@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 const apiRouter = require('./api')
 
 const port = 18727
@@ -10,6 +11,7 @@ const app = express()
 app.use(cors({
   origin: /^http\:\/\/localhost/
 }))
+app.use(bodyParser.json({ limit: '50mb' }))
 
 app.use('/api', apiRouter)
 

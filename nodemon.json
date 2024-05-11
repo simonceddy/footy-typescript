@@ -2,7 +2,8 @@
   "ignore": [
     "./src",
     "./node_modules",
-    "./public",
+    "./client",
+    "./build",
     "./resources"
   ]
 }

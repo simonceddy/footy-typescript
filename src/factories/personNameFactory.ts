@@ -19,7 +19,7 @@ export default function personNameFactory (
     attributes?.firstName ?? randomVal(firstNames),
     attributes?.surname ?? randomVal(surnames),
     options?.noNickname === true
-      ? null
+      ? undefined
       : attributes?.nickname ?? randomUnusedVal(nicknames, options?.takenNicknames)
   )
 }
