@@ -21,4 +21,9 @@ simulationRouter.get('/match', async (_req, res) => {
   return res.json(result())
 })
 
+simulationRouter.post('/match', async (req, res) => {
+  // TODO attempt to create simulation from request
+  // fill required data from factories
+})
+
 module.exports = simulationRouter;

@@ -1,5 +1,9 @@
 # Footy typescript thing
 
+This repo contains my latest attempt at simulating an [AFL](https://en.wikipedia.org/wiki/Australian_Football_League) match.
+
+The simulation runs by generating Actions that correspond to an on field event or a change in match state, then processing those actions within an event loop. Which action happens next is determined by the prior action and random number generators, with the eventual goal of factoring in player attributes, entity positions on an xy grid, and match state.
+
 ## Current Feature State
 
 Current features include:
@@ -33,6 +37,7 @@ Current features include:
 - Ability to run simulation from submitted matchups
 - Add some algorithmic name generation instead of solely using static data
 - Use better caching for data used by generators
+- Pseudo parallel action generation and handling ideally allowing individual entities to have their own actions and thus move around the xy grid
 - General improvements and optimisations
 - Better typescripting as I learn more
 
