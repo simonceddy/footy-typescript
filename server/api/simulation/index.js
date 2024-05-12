@@ -1,14 +1,19 @@
 const express = require('express')
+const matchSchema = require('./matchup-schema.json')
 const prepareMatchSimulation = require('../../../build/core/bootstrap/prepareMatchSimulation').default;
 const {
   matchupFactory,
-  playerFactory,
-  leagueFactory,
-  fixtureFactory
+  // playerFactory,
+  // leagueFactory,
+  // fixtureFactory
 } = require('../../../build/factories');
 const { Kernel } = require('../../../build/core');
 
 const simulationRouter = express.Router()
+
+simulationRouter.get('/match/schema', (_req, res) => {
+  res.json(matchSchema)
+})
 
 simulationRouter.get('/match', async (_req, res) => {
   const kernel = Kernel.init()

@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 // import Table from 'cli-table'
 // import PlayingList from './collections/PlayingList'
+import * as TJS from 'typescript-json-schema'
 import { Kernel } from './core'
 import { fixtureFactory, leagueFactory } from './factories'
 import prepareMatchSimulation from './core/bootstrap/prepareMatchSimulation'
@@ -11,6 +12,12 @@ import EventEmitter from 'events'
 // import { playingFieldSVG, renderHTML } from './support/html'
 // import { type Player } from './types/entities'
 
+const program = TJS.getProgramFromFiles([path.resolve(__dirname, '../src/types/factories.d.ts')])
+
+const schema = TJS.generateSchema(program, 'MatchupFactoryAttributes')
+
+fs.writeFileSync(path.join(__dirname, '../storage/matchup-schema.json'), JSON.stringify(schema))
+
 const footy = Kernel.init()
 
 console.log(footy.name, footy.version)
@@ -18,14 +25,14 @@ console.log(footy.name, footy.version)
 const league = leagueFactory()
 console.log(league.name)
 
-const fixture = fixtureFactory(Object.values(league.teams), 18, true)
-const match1 = fixture.match(1, 1)
-if (match1 !== undefined) {
-  const sim = prepareMatchSimulation(matchToContainer(match1, league, footy), footy)
-  const result = footy.run(sim)
-  console.log(result.score)
-  fs.writeFileSync(path.join(__dirname, '../storage/result1.json'), JSON.stringify(result, undefined, '\t'))
-}
+// const fixture = fixtureFactory(Object.values(league.teams), 18, true)
+// const match1 = fixture.match(1, 1)
+// if (match1 !== undefined) {
+//   const sim = prepareMatchSimulation(matchToContainer(match1, league, footy), footy)
+//   const result = footy.run(sim)
+//   console.log(result.score)
+//   fs.writeFileSync(path.join(__dirname, '../storage/result1.json'), JSON.stringify(result, undefined, '\t'))
+// }
 // const fixtureFilename = path.join(__dirname, '../storage/fixture.json')
 // const leagueFilename = path.join(__dirname, '../storage/league.json')
 // fs.writeFileSync(fixtureFilename, JSON.stringify(fixture, undefined, '\t'))

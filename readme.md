@@ -39,7 +39,6 @@ Current features include:
 - Add some algorithmic name generation instead of solely using static data
 - Use better caching for data used by generators
 - Pseudo parallel action generation and handling ideally allowing individual entities to have their own actions and thus move around the xy grid
-- Schema route for user submitted matchup object
 - General improvements and optimisations
 - Better typescripting as I learn more
 
@@ -69,6 +68,7 @@ The server can be run with `npm run server`, which will be accessible at `http:/
 - `GET /api/factory/match` - generates a random match between two teams
 - `GET /api/factory/league` - generates an entire league of 18 teams
 - `GET /api/simulation/match` - runs a simulation on a randomly generated matchup and returns the results
+- `GET /api/simulation/match/schema` - gets the schema for a user submitted matchup request body
 - `POST /api/simulation/match` - runs a simulation from a user submitted matchup returns the results
 - `GET /*` - client routing handled by react-router
 - static routing for the client directory
