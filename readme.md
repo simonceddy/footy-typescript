@@ -65,12 +65,12 @@ The server can be run with `npm run server`, which will be accessible at `http:/
 
 ### Routing
 
-- `GET api/factory/player` - generates a random player entity
-- `GET api/factory/match` - generates a random match between two teams
-- `GET api/factory/league` - generates an entire league of 18 teams
-- `GET api/simulation/match` - runs a simulation on a randomly generated matchup and returns the results
-- `POST api/simulation/match` - runs a simulation from a user submitted matchup returns the results
-- `GET *` - client routing handled by react-router
+- `GET /api/factory/player` - generates a random player entity
+- `GET /api/factory/match` - generates a random match between two teams
+- `GET /api/factory/league` - generates an entire league of 18 teams
+- `GET /api/simulation/match` - runs a simulation on a randomly generated matchup and returns the results
+- `POST /api/simulation/match` - runs a simulation from a user submitted matchup returns the results
+- `GET /*` - client routing handled by react-router
 - static routing for the client directory
 
 ### Middleware
