@@ -20,7 +20,6 @@ Current features include:
 - Simulations will often cause several players to amass record setting statlines and several other players to have no stats at all
 - Scoring is too low in most simulations
 - The basis for a coordinates system for moving entities is in place but is currently not implemented. At present all entities stay in the same locations
-- The duration of actions is currently handled by the simulation event loop and each tick of the clock is a constant amount. This means that currently a hitout takes the same amount of time as a set shot for goal.
 - Generation of attributes and position determination is rudimentary and often results in poor distribution of positions
 - Schema for matchup request data is based on the wrong interface... Whoops!
 - Still some bugs with simulating user submitted matchups
@@ -34,7 +33,6 @@ Current features include:
 - Give player entities awareness of their position on the playing field and factor this into determining next actions
 - Implement match state awareness e.g. how far in front/behind a players team is
 - Implement clock awareness e.g. how long is left in a quarter/match
-- Alter how time elapses so that actions determine their own durations. This should allow for stopped clock situations and hopefully sort out some of the issues with unrealistic numbers
 - Better attributes generation and position determination, likely including changes to valid attributes
 - Ability to set certain config via dot file like .env
 - Add some algorithmic name generation instead of solely using static data

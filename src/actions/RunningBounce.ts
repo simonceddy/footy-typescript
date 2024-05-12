@@ -4,6 +4,8 @@ import type MatchSimulation from '../core/MatchSimulation'
 import { type Player } from '../types/entities'
 
 export default class RunningBounce implements Action {
+  duration: number = 400
+
   static NAME: string = 'actions.runningbounce'
 
   constructor (public simulation: MatchSimulation, public player: Player) {
@@ -15,6 +17,10 @@ export default class RunningBounce implements Action {
 
   get name (): string {
     return RunningBounce.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

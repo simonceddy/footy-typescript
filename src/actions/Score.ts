@@ -10,6 +10,8 @@ import KickIn from './KickIn'
 import RuckContest from './RuckContest'
 
 export default class Score implements Action {
+  duration: number = 0
+
   static NAME: string = 'actions.score'
 
   constructor (public simulation: MatchSimulation, public player: Player) {
@@ -21,6 +23,10 @@ export default class Score implements Action {
 
   get name (): string {
     return Score.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

@@ -1,3 +1,4 @@
+import { random } from 'lodash'
 import type EventEmitter from 'events'
 import { type Action } from '../types/actions'
 import type MatchSimulation from '../core/MatchSimulation'
@@ -5,9 +6,12 @@ import { type Player } from '../types/entities'
 import { matchStates } from '../support'
 
 export default class Reposition implements Action {
+  duration: number
+
   static NAME: string = 'actions.reposition'
 
   constructor (public simulation: MatchSimulation, public player: Player) {
+    this.duration = random(1, 10) * 100
   }
 
   get eventEmitter (): EventEmitter {
@@ -16,6 +20,10 @@ export default class Reposition implements Action {
 
   get name (): string {
     return Reposition.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

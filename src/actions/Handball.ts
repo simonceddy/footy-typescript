@@ -9,6 +9,8 @@ import { rand } from '../helpers'
 import Turnover from './Turnover'
 
 export default class Handball implements Action {
+  duration: number = 400
+
   static NAME: string = 'actions.handball'
 
   ai: PlayerAI
@@ -25,6 +27,10 @@ export default class Handball implements Action {
 
   get name (): string {
     return Handball.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

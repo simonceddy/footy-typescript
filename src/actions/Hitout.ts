@@ -8,6 +8,8 @@ import { matchStates } from '../support'
 import { type PlayerAI } from '../types/ai'
 
 export default class Hitout implements Action {
+  duration: number = 200
+
   static NAME: string = 'actions.hitout'
 
   private readonly ai: PlayerAI
@@ -38,6 +40,10 @@ export default class Hitout implements Action {
     return allOnfieldPlayers[Math.floor(Math.random() * allOnfieldPlayers.length)]
   }
 
+  getDuration (): number {
+    return this.duration
+  }
+
   process (): Action | null {
     // TODO put logic here
     // determine hitout result: to advantage, sharked, roved, to space, to contest
@@ -59,7 +65,7 @@ export default class Hitout implements Action {
     this.simulation.footy.inPossession = undefined
     // console.log('the hitout goes into congestion')
     this.simulation.state = matchStates.BALL_CONTESTED
-
+    this.duration = 2000
     return new GainPossession(this.simulation, this.getRandomPlayer())
   }
 }

@@ -1,3 +1,4 @@
+import { random } from 'lodash'
 import type EventEmitter from 'events'
 import { type Action } from '../types/actions'
 import type MatchSimulation from '../core/MatchSimulation'
@@ -11,6 +12,8 @@ import Turnover from './Turnover'
 import MarkingContest from './MarkingContest'
 
 export default class Kick implements Action {
+  duration: number
+
   static NAME: string = 'actions.kick'
 
   private readonly ai: PlayerAI
@@ -19,6 +22,7 @@ export default class Kick implements Action {
     const ai = this.simulation.playerAI.forPlayer(this.player)
     if (ai === undefined) throw new Error(`No Player AI for ${this.player.name.toString(true)}`)
     this.ai = ai
+    this.duration = random(6, 20) * 100
   }
 
   get eventEmitter (): EventEmitter {
@@ -27,6 +31,10 @@ export default class Kick implements Action {
 
   get name (): string {
     return Kick.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

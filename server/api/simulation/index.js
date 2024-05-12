@@ -33,7 +33,7 @@ simulationRouter.post('/match', async (req, res) => {
     playingField,
     matchId
   } = req.body
-  console.log(homeTeamContainer, awayTeamContainer, playingField)
+  // console.log(homeTeamContainer, awayTeamContainer, playingField)
 
   const homeTeamLocation = homeTeamContainer?.team?.location
 

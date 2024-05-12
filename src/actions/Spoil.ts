@@ -5,6 +5,8 @@ import { type Player } from '../types/entities'
 import BallInSpace from './BallInSpace'
 
 export default class Spoil implements Action {
+  duration: number = 400
+
   static NAME: string = 'actions.spoil'
 
   constructor (public simulation: MatchSimulation, public player: Player) {
@@ -16,6 +18,10 @@ export default class Spoil implements Action {
 
   get name (): string {
     return Spoil.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

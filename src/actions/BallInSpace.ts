@@ -7,6 +7,8 @@ import { type Player } from '../types/entities'
 import GainPossession from './GainPossession'
 
 export default class BallInSpace implements Action {
+  duration: number = 1000
+
   static NAME: string = 'actions.ballinspace'
 
   constructor (public simulation: MatchSimulation) {
@@ -27,6 +29,10 @@ export default class BallInSpace implements Action {
     ]
 
     return allOnfieldPlayers[Math.floor(Math.random() * allOnfieldPlayers.length)]
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

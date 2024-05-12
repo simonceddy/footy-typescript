@@ -6,4 +6,5 @@ export interface Action {
   simulation: MatchSimulation
   name: string
   process: () => Action | null
+  getDuration: () => number
 }

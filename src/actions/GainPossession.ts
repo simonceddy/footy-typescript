@@ -6,6 +6,8 @@ import { matchStates } from '../support'
 import Disposal from './Disposal'
 
 export default class GainPossession implements Action {
+  duration: number = 0
+
   static NAME: string = 'actions.gainpossession'
 
   constructor (public simulation: MatchSimulation, public player: Player, private readonly isProtected = false) {
@@ -17,6 +19,10 @@ export default class GainPossession implements Action {
 
   get name (): string {
     return GainPossession.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

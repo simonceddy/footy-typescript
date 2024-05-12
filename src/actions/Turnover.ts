@@ -6,6 +6,8 @@ import { type PlayerAI } from '../types/ai'
 import GainPossession from './GainPossession'
 
 export default class Turnover implements Action {
+  duration: number = 0
+
   static NAME: string = 'actions.turnover'
 
   ai: PlayerAI
@@ -22,6 +24,10 @@ export default class Turnover implements Action {
 
   get name (): string {
     return Turnover.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

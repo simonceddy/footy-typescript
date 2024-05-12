@@ -19,6 +19,7 @@ export default class ProcessMatch {
       const action = this.queue.shift()
       if (action !== undefined) {
         const next = action.process()
+        simulation.clock.tick(action.getDuration())
         if (next !== null) this.queue.push(next)
       }
     }

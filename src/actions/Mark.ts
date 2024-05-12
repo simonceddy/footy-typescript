@@ -5,6 +5,8 @@ import { type Player } from '../types/entities'
 import GainPossession from './GainPossession'
 
 export default class Mark implements Action {
+  duration: number = 400
+
   static NAME: string = 'actions.mark'
 
   constructor (public simulation: MatchSimulation, public player: Player) {
@@ -16,6 +18,10 @@ export default class Mark implements Action {
 
   get name (): string {
     return Mark.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

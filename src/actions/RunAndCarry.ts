@@ -3,8 +3,11 @@ import { type Action } from '../types/actions'
 import type MatchSimulation from '../core/MatchSimulation'
 import { type Player } from '../types/entities'
 import { type PlayerAI } from '../types/ai'
+import { random } from 'lodash'
 
 export default class RunAndCarry implements Action {
+  duration: number
+
   static NAME: string = 'actions.runandcarry'
 
   ai: PlayerAI
@@ -13,6 +16,8 @@ export default class RunAndCarry implements Action {
     const ai = this.simulation.playerAI.forPlayer(this.player)
     if (ai === undefined) throw new Error(`No Player AI for ${this.player.name.toString(true)}`)
     this.ai = ai
+
+    this.duration = random(8, 30) * 100
   }
 
   get eventEmitter (): EventEmitter {
@@ -21,6 +26,10 @@ export default class RunAndCarry implements Action {
 
   get name (): string {
     return RunAndCarry.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

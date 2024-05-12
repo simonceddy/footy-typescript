@@ -11,6 +11,8 @@ import SetShot from './SetShot'
 import RunningShot from './RunningShot'
 
 export default class Disposal implements Action {
+  duration: number = 200
+
   static NAME: string = 'actions.disposal'
 
   player: Player
@@ -33,6 +35,10 @@ export default class Disposal implements Action {
 
   get name (): string {
     return Disposal.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

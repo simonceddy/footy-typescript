@@ -4,6 +4,8 @@ import type MatchSimulation from '../core/MatchSimulation'
 import { type Player } from '../types/entities'
 
 export default class Shepherd implements Action {
+  duration: number = 0
+
   static NAME: string = 'actions.shepherd'
 
   constructor (public simulation: MatchSimulation, public player: Player, public target: Player) {
@@ -15,6 +17,10 @@ export default class Shepherd implements Action {
 
   get name (): string {
     return Shepherd.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

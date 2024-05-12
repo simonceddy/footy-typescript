@@ -9,6 +9,8 @@ import Hitout from './Hitout'
 import FreeKick from './FreeKick'
 
 export default class RuckContest implements Action {
+  duration: number = 600
+
   static NAME: string = 'action.ruckContest'
 
   homeRuck: Player
@@ -20,6 +22,10 @@ export default class RuckContest implements Action {
   ) {
     this.awayRuck = this.simulation.matchup.awayTeamContainer.positionMap[positions.RUCK]
     this.homeRuck = this.simulation.matchup.homeTeamContainer.positionMap[positions.RUCK]
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

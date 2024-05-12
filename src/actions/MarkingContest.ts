@@ -9,6 +9,8 @@ import InterceptMark from './InterceptMark'
 import Spoil from './Spoil'
 
 export default class MarkingContest implements Action {
+  duration: number = 200
+
   static NAME: string = 'actions.markingcontest'
 
   ai: PlayerAI
@@ -25,6 +27,10 @@ export default class MarkingContest implements Action {
 
   get name (): string {
     return MarkingContest.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

@@ -7,6 +7,8 @@ import { positions } from '../support'
 import GainPossession from './GainPossession'
 
 export default class KickIn implements Action {
+  duration: number = 0
+
   static NAME: string = 'actions.kickin'
 
   ai: PlayerAI
@@ -23,6 +25,10 @@ export default class KickIn implements Action {
 
   get name (): string {
     return KickIn.NAME
+  }
+
+  getDuration (): number {
+    return this.duration
   }
 
   process (): Action | null {

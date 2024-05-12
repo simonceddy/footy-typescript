@@ -4,13 +4,16 @@ import type MatchSimulation from '../core/MatchSimulation'
 import { type Player } from '../types/entities'
 import Turnover from './Turnover'
 import Score from './Score'
-import { rand } from '../helpers'
 import { matchStates } from '../support'
+import { random } from 'lodash'
 
 export default class SetShot implements Action {
+  duration: number
+
   static NAME: string = 'actions.setshot'
 
   constructor (public simulation: MatchSimulation, public player: Player) {
+    this.duration = random(4, 15) * 1000
   }
 
   get eventEmitter (): EventEmitter {
@@ -21,11 +24,15 @@ export default class SetShot implements Action {
     return SetShot.NAME
   }
 
+  getDuration (): number {
+    return this.duration
+  }
+
   process (): Action | null {
     // TODO put logic here
     // move set shot logic here
     this.simulation.state = matchStates.SET_SHOT
-    const scoreRoll = rand(0, 4)
+    const scoreRoll = random(0, 4)
     if (scoreRoll === 0) {
       // out on the full - return free kick to opponent
       return new Turnover(this.simulation, this.player)

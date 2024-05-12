@@ -29,7 +29,7 @@ export default class EventLoop {
       }
       // console.log(`loop ${currentLoop}`)
       currentLoop++
-      this.clock.tick(1000)
+      this.clock.tick(50)
     }
     console.log(`loop took ${currentLoop} iterations`)
   }
