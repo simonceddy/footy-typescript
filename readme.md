@@ -76,6 +76,7 @@ The server can be run with `npm run server`, which will be accessible at `http:/
 ### Middleware
 
 - cors middleware setup to only allow connections from `localhost`
+- `bodyParser.json` for user submitted matchup data
 
 ### [Client](#client)
 
