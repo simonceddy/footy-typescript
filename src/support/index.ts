@@ -6,7 +6,7 @@ import { type League, type MatchUp } from '../types/entities'
 import TeamContainer from '../core/TeamContainer'
 import { playingFieldFactory } from '../factories'
 
-export * as positions from './positions'
+import * as positionsSupport from './positions'
 export { default as KeyValuePair } from './KeyValuePair'
 export * as html from './html'
 export * as constants from './consts'
@@ -31,6 +31,10 @@ export function matchToContainer (match: MatchUp, league: League, emitter?: Even
     match.homeTeam.homeground ?? playingFieldFactory()
   )
 }
+
+export const positionKeys: string[] = Object.keys(positionsSupport)
+
+export const positions = positionsSupport
 
 export const matchStates = {
   RUCK_CONTEST: 'RUCK_CONTEST',

@@ -1,5 +1,7 @@
 import { random, shuffle } from 'lodash'
 
+export * as matchHelpers from './matchHelpers'
+
 export function randomKey (arr: string[]): number {
   return Math.floor(Math.random() * arr.length)
 }

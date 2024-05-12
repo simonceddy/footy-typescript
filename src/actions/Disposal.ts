@@ -6,8 +6,9 @@ import { rand } from '../helpers'
 import Kick from './Kick'
 import Handball from './Handball'
 import { type PlayerAI } from '../types/ai'
-import Score from './Score'
-import Turnover from './Turnover'
+import { matchStates } from '../support'
+import SetShot from './SetShot'
+import RunningShot from './RunningShot'
 
 export default class Disposal implements Action {
   static NAME: string = 'actions.disposal'
@@ -39,15 +40,13 @@ export default class Disposal implements Action {
     // TODO perhaps move to another action?
     if (this.ai.canScore()) {
       // determine if set shot
-      // take shot
-      // TODO set applicable stats
-      const scoreRoll = rand(0, 4)
-      if (scoreRoll === 0) {
-        // out on the full - return free kick to opponent
-        return new Turnover(this.simulation, this.player)
+      if (this.simulation.state === matchStates.BALL_IN_PROTECTED_POSSESSION ||
+        this.simulation.state === matchStates.FREE_KICK
+      ) {
+        return new SetShot(this.simulation, this.player)
       }
-      // return score action
-      return new Score(this.simulation, this.player)
+      // TODO determine if pass or take shot
+      return new RunningShot(this.simulation, this.player)
     }
     // determine type of disposal
     const typeRoll = rand(1, 2)

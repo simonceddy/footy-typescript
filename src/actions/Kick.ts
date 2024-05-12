@@ -8,6 +8,7 @@ import Mark from './Mark'
 import { type PlayerAI } from '../types/ai'
 import BallInSpace from './BallInSpace'
 import Turnover from './Turnover'
+import MarkingContest from './MarkingContest'
 
 export default class Kick implements Action {
   static NAME: string = 'actions.kick'
@@ -28,16 +29,6 @@ export default class Kick implements Action {
     return Kick.NAME
   }
 
-  private getOwnPosition (): string {
-    const pos = this.ai.isAwayPlayer
-      ? this.simulation.matchup.awayTeamContainer.playersPosition(this.player)
-      : this.simulation.matchup.homeTeamContainer.playersPosition(this.player)
-    if (pos === null) {
-      throw new Error(`Could not resolve position for ${this.player.name.toString(true)}`)
-    }
-    return pos
-  }
-
   process (): Action | null {
     // determine target or kick to space
     this.simulation.state = matchStates.BALL_IN_FLIGHT
@@ -47,15 +38,14 @@ export default class Kick implements Action {
     if (roll === 0) {
       return new Turnover(this.simulation, this.player)
     }
+    if (roll === 4) {
+      return new BallInSpace(this.simulation)
+    }
+    const target: Player = this.ai.getTarget()
     if (roll < 3) {
-      const target: Player = this.ai.getTarget()
       // console.log(`nice kick to ${target.name.toString(true)}`)
-      return new Mark(this.simulation, target)
+      return new MarkingContest(this.simulation, target)
     }
-    if (roll === 3) {
-      // return contested ball
-    }
-
-    return new BallInSpace(this.simulation)
+    return new Mark(this.simulation, target)
   }
 }

@@ -1,18 +1,10 @@
 import { Vector } from '../../geometry'
-import determineStartingCoordinates from '../../geometry/determineStartingCoordinates'
-import { positions } from '../../support'
+import { positionKeys } from '../../support'
 import { type Match } from '../../types/core'
 import { type PlayingList, type Player } from '../../types/entities'
-import { type PositionMap } from '../../types/support'
 import CoordinatesDirectory from '../CoordinatesDirectory'
-import { type Vector as VectorType } from '../../types/geometry.d'
 import { canPlayInPosition } from '../../support/playerPositionMap'
-
-const positionKeys: string[] = Object.keys(positions)
-
-function isVector (coords: VectorType | undefined): coords is VectorType {
-  return coords?.x !== undefined && coords.y !== undefined
-}
+import { setStartingPositions } from '../../helpers/matchHelpers'
 
 function fillPositions (playingList: PlayingList, quiet: boolean = false): Record<string, Player> {
   let players = [...playingList.players].sort((a, b) => {
@@ -48,21 +40,10 @@ export default function preparePlayingField (match: Match, quiet: boolean = fals
     new Vector(match.playingField.center.x, match.playingField.center.y)
   )
 
-  const homeCoords: PositionMap = determineStartingCoordinates(match.playingField)
-  const awayCoords: PositionMap = determineStartingCoordinates(match.playingField, true)
-
   const homePos = fillPositions(match.homeTeamPlayers, quiet)
   const awayPos = fillPositions(match.awayTeamPlayers, quiet)
   match.homeTeamContainer.positionMap = homePos
   match.awayTeamContainer.positionMap = awayPos
-  positionKeys.forEach((pos, id) => {
-    if (isVector(homeCoords[pos]) && homePos[pos] !== undefined) {
-      directory.forPlayer(homePos[pos], awayCoords[pos])
-    }
-    if (isVector(awayCoords[pos]) && awayPos[pos] !== undefined) {
-      directory.forPlayer(awayPos[pos], awayCoords[pos])
-    }
-  })
 
-  return directory
+  return setStartingPositions(match, directory)
 }

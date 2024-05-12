@@ -15,7 +15,7 @@ export default function playerAttributesFactory (
     return new PlayerAttributes(attributes?.playerId ?? '')
   }
   const agility = attributes?.attributes?.agility ?? rand(3, 10, true)
-  const speed = attributes?.attributes?.speed ?? rand(agility / 1.5, 10, true)
+  const speed = attributes?.attributes?.speed ?? rand(10 - agility, 10, true)
   const endurance = attributes?.attributes?.endurance ?? (rand((agility + speed) % 8 + 2, 9, true))
   const strength = attributes?.attributes?.strength ?? rand((agility + speed + endurance) % 8 + 2, 9, true)
   const skill = attributes?.attributes?.skill ?? rand((agility + strength) % 8 + 2, 9, true)

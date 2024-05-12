@@ -25,6 +25,7 @@ export default class Kernel extends EventEmitter implements KernelType {
     const actionQueue = new ActionQueue()
     const matchProcessor = new ProcessMatch(actionQueue)
     this.on(StartQuarter.NAME, (sim: MatchSimulation) => {
+      // TODO reset player positions
       sim.state = matchStates.RUCK_CONTEST
     })
     this.on(StartMatch.NAME, (sim: MatchSimulation) => {

@@ -4,60 +4,7 @@ import type MatchSimulation from '../core/MatchSimulation'
 import { type Vector as VectorType } from '../types/geometry'
 import { Vector } from '../geometry'
 import { getOpposingPosition, positions } from '../support'
-
-const bpos = [
-  positions.FULL_BACK,
-  positions.RIGHT_BACK_POCKET,
-  positions.LEFT_BACK_POCKET
-]
-
-const hbpos = [
-  positions.CENTER_HALF_BACK,
-  positions.RIGHT_HALF_BACK,
-  positions.LEFT_HALF_BACK
-]
-
-const mpos = [
-  positions.CENTER,
-  positions.RUCK,
-  positions.RUCK_ROVER,
-  positions.ROVER,
-  positions.LEFT_WINGER,
-  positions.RIGHT_WINGER
-]
-
-const hfpos = [
-  positions.CENTER_HALF_FORWARD,
-  positions.RIGHT_HALF_FORWARD,
-  positions.LEFT_HALF_FORWARD
-]
-const fpos = [
-  positions.FULL_FORWARD,
-  positions.RIGHT_FORWARD_POCKET,
-  positions.LEFT_FORWARD_POCKET
-]
-
-const pos = {
-  [positions.FULL_BACK]: hbpos,
-  [positions.RIGHT_BACK_POCKET]: hbpos,
-  [positions.LEFT_BACK_POCKET]: hbpos,
-  [positions.CENTER_HALF_BACK]: mpos,
-  [positions.RIGHT_HALF_BACK]: mpos,
-  [positions.LEFT_HALF_BACK]: mpos,
-  [positions.CENTER]: hfpos,
-  [positions.ROVER]: hfpos,
-  [positions.RUCK]: hfpos,
-  [positions.RUCK_ROVER]: hfpos,
-  [positions.LEFT_WINGER]: hfpos,
-  [positions.RIGHT_WINGER]: hfpos,
-  [positions.CENTER_HALF_FORWARD]: fpos,
-  [positions.RIGHT_HALF_FORWARD]: fpos,
-  [positions.LEFT_HALF_FORWARD]: fpos,
-  [positions.FULL_FORWARD]: fpos,
-  [positions.RIGHT_FORWARD_POCKET]: fpos,
-  [positions.LEFT_FORWARD_POCKET]: fpos,
-  [positions.DEBUG]: [...bpos, ...hbpos, ...mpos, ...hfpos, ...fpos]
-}
+import { bpos, fpos, hbpos, hfpos, mpos, pos } from '../support/playerAI'
 
 export default class PlayerAI implements PlayerAIType {
   isAwayPlayer: boolean
@@ -75,14 +22,7 @@ export default class PlayerAI implements PlayerAIType {
     }
     this.isAwayPlayer = this.player.team?.id === this.simulation.matchup.awayTeam.id
     this.isHomePlayer = !this.isAwayPlayer
-    this.currentOwnPosition = this.initOwnPosition()
-  }
-
-  private initOwnPosition (): string | null {
-    const pos = this.isAwayPlayer
-      ? this.simulation.matchup.awayTeamContainer.playersPosition(this.player)
-      : this.simulation.matchup.homeTeamContainer.playersPosition(this.player)
-    return pos
+    this.currentOwnPosition = this.getPositionOf(this.player)
   }
 
   teamInPossession (): Team | null {
@@ -146,7 +86,7 @@ export default class PlayerAI implements PlayerAIType {
   }
 
   getOpponent (position?: string): Player {
-    const pos1 = this.ownPosition
+    const pos1 = position ?? this.ownPosition
     // TODO
     if (pos1 === null) {
       // throw new Error(`${this.player.name.toString(true)} has no current position`)
@@ -184,6 +124,30 @@ export default class PlayerAI implements PlayerAIType {
     return target
   }
 
+  getPositionOf (player: Player): string | null {
+    const isAwayPlayer = player.team?.id === this.simulation.matchup.awayTeam.id
+    return isAwayPlayer
+      ? this.simulation.matchup.awayTeamContainer.playersPosition(player)
+      : this.simulation.matchup.homeTeamContainer.playersPosition(player)
+  }
+
+  getOpponentOf (player: Player): Player | null {
+    // find player position
+    if (player.id === this.player.id) {
+      return this.getOpponent()
+    }
+    const isAwayPlayer = player.team?.id === this.simulation.matchup.awayTeam.id
+    const pos = this.getPositionOf(player)
+
+    if (pos !== null) {
+      const opponentPos = getOpposingPosition(pos)
+      return (isAwayPlayer
+        ? this.simulation.matchup.awayTeamContainer.positionMap[opponentPos]
+        : this.simulation.matchup.homeTeamContainer.positionMap[opponentPos]) ?? null
+    }
+    return null
+  }
+
   getRandomPlayer (): Player {
     const allOnfieldPlayers = [
       ...Object.values(this.simulation.matchup.homeTeamContainer.positionMap),
@@ -191,5 +155,19 @@ export default class PlayerAI implements PlayerAIType {
     ]
 
     return allOnfieldPlayers[Math.floor(Math.random() * allOnfieldPlayers.length)]
+  }
+
+  scoresLevel (): boolean {
+    return this.simulation.scores.homeTotal() === this.simulation.scores.awayTotal()
+  }
+
+  closeMargin (maxMargin: number = 11): boolean {
+    const margin = (this.simulation.scores.homeTotal() - this.simulation.scores.awayTotal())
+    return margin <= maxMargin && margin >= -maxMargin
+  }
+
+  wideMargin (minMargin: number = 36): boolean {
+    const margin = (this.simulation.scores.homeTotal() - this.simulation.scores.awayTotal())
+    return margin >= minMargin && margin <= -minMargin
   }
 }

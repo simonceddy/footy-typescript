@@ -2,6 +2,7 @@ import type EventEmitter from 'events'
 import { type Action } from '../types/actions'
 import type MatchSimulation from '../core/MatchSimulation'
 
+// TODO is this neccessary
 export default class LosePossession implements Action {
   static NAME: string = 'actions.losepossession'
 

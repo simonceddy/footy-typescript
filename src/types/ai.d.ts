@@ -17,7 +17,7 @@ export interface MatchStateAI {}
 
 export interface UmpireAI {}
 
-export interface PlayerAI {
+export interface PlayerAI extends ScoreboardAI {
   teamInPossession: () => Team | null
   ownTeamInPossession: () => boolean
   opponentTeamInPossession: () => boolean
@@ -31,6 +31,8 @@ export interface PlayerAI {
   getTarget: (close?: boolean) => Player
   canScore: () => boolean
   getOpponent: (position?: string) => Player
+  getPositionOf: (player: Player) => string | null
+  getOpponentOf: (player: Player) => Player | null
   getRandomPlayer: () => Player
 }
 
