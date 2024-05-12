@@ -15,12 +15,12 @@ export default class Scoreboard {
     this.awayScore = {
       behinds: 0,
       goals: 0,
-      team: homeTeam
+      team: awayTeam
     }
     this.homeScore = {
       behinds: 0,
       goals: 0,
-      team: awayTeam
+      team: homeTeam
     }
   }
 
