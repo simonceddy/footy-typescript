@@ -11,6 +11,7 @@ export interface TeamFactoryAttributes {
   colour1?: string
   colour2?: string
   colour3?: string
+  id?: string
 }
 
 export interface TeamFactoryOptions {
@@ -33,6 +34,7 @@ export interface PlayerFactoryAttributes extends PersonNameFactoryAttributes, Te
   team?: Team | undefined
   number?: number
   height?: number
+  id?: string
 }
 
 export interface PlayerFactoryOptions extends PersonNameFactoryOptions, TeamFactoryOptions, PlayerAttributeFactoryOptions {
@@ -68,6 +70,7 @@ export interface MatchupFactoryAttributes extends
   PlayerAttributesFactoryAttributes,
   PlayerFactoryAttributes,
   PersonNameFactoryAttributes {
+  id?: string
   homeTeamAttributes?: TeamFactoryAttributes
   awayTeamAttributes?: TeamFactoryAttributes
   homePlayingList?: Player[]

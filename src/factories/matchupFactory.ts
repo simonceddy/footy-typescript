@@ -32,6 +32,7 @@ export default function matchupFactory (
     new Clock(eventEmitter),
     new TeamContainer(homeTeam, homeList),
     new TeamContainer(awayTeam, awayList),
-    playingField
+    playingField,
+    attributes?.id
   )
 }

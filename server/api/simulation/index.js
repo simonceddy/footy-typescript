@@ -27,16 +27,23 @@ simulationRouter.get('/match', async (_req, res) => {
 })
 
 simulationRouter.post('/match', async (req, res) => {
-  const { homeTeamContainer, awayTeamContainer, playingField } = req.body
+  const {
+    homeTeamContainer,
+    awayTeamContainer,
+    playingField,
+    matchId
+  } = req.body
   console.log(homeTeamContainer, awayTeamContainer, playingField)
 
   const homeTeamLocation = homeTeamContainer?.team?.location
 
   /** @type {import('../../../src/types/factories').MatchupFactoryAttributes} */
   const factoryAttributes = {
+    id: matchId,
     homeTeamAttributes: {
       location: homeTeamLocation,
       teamName: homeTeamContainer?.team?.name,
+      id: homeTeamContainer?.team?.id,
       shorthand: homeTeamContainer?.team?.shorthand,
       homeground: homeTeamContainer?.team?.homeground,
       colour1: homeTeamContainer?.team?.colours?.colour1,
@@ -46,6 +53,7 @@ simulationRouter.post('/match', async (req, res) => {
     awayTeamAttributes: {
       location: awayTeamContainer?.team?.location,
       teamName: awayTeamContainer?.team?.name,
+      id: awayTeamContainer?.team?.id,
       shorthand: awayTeamContainer?.team?.shorthand,
       homeground: awayTeamContainer?.team?.homeground,
       colour1: awayTeamContainer?.team?.colours?.colour1,

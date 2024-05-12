@@ -38,6 +38,7 @@ export interface Player {
   positions?: string[]
 }
 export interface MatchUp {
+  id?: string
   homeTeam: Team
   awayTeam: Team
 }

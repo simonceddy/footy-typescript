@@ -24,10 +24,10 @@ function getHeight (attributes: PlayerAttributes): number {
 }
 
 export default function playerFactory (
-  attributes: PlayerFactoryAttributes | undefined = undefined,
-  options: PlayerFactoryOptions | undefined = undefined
+  attributes?: PlayerFactoryAttributes,
+  options?: PlayerFactoryOptions
 ): PlayerType {
-  const id: string = uuidv4()
+  const id: string = attributes?.id ?? uuidv4()
   const playerAttributes = playerAttributesFactory({ ...attributes, playerId: id }, options)
 
   const cm = attributes?.height ?? Math.round(getHeight(playerAttributes))

@@ -19,6 +19,7 @@ export default function playingListFactory (
   for (let i = 0; i < totalPlayers; i += 1) {
     const player: Player | null = attributes?.players !== undefined ? (attributes.players[i] ?? null) : null
     list.add(playerFactory({
+      id: player?.id,
       firstName: player?.name?.firstName,
       surname: player?.name?.surname,
       nickname: player?.name?.nickname,

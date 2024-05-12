@@ -2,7 +2,7 @@
 
 This repo contains my latest attempt at simulating an [AFL](https://en.wikipedia.org/wiki/Australian_Football_League) match.
 
-The simulation runs by generating Actions that correspond to an on field event or a change in match state, then processing those actions within an event loop. Which action happens next is determined by the prior action and random number generators, with the eventual goal of factoring in player attributes, entity positions on an xy grid, and match state.
+The simulation runs by generating Actions that correspond to an on field event or a change in match state, then processing those actions within an event loop. Which action happens next is determined by the prior action and random number generators, with the eventual goal of factoring in player attributes, entity positions on an xy grid, and match state. It's like one big decision tree.
 
 ## Current Feature State
 
@@ -22,6 +22,7 @@ Current features include:
 - The basis for a coordinates system for moving entities is in place but is currently not implemented. At present all entities stay in the same locations
 - The duration of actions is currently handled by the simulation event loop and each tick of the clock is a constant amount. This means that currently a hitout takes the same amount of time as a set shot for goal.
 - Generation of attributes and position determination is rudimentary and often results in poor distribution of positions
+- Schema for matchup request data is based on the wrong interface... Whoops!
 - Still some bugs with simulating user submitted matchups
 - Various poorly optimised code and typescript rookie mistakes
 

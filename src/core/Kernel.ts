@@ -10,6 +10,7 @@ import ProcessMatch from './ProcessMatch'
 import ActionQueue from './ActionQueue'
 import StartQuarter from '../events/StartQuarter'
 import { matchStates } from '../support'
+import prepareResults from './results/prepareResults'
 
 export default class Kernel extends EventEmitter implements KernelType {
   get name (): string {
@@ -46,10 +47,7 @@ export default class Kernel extends EventEmitter implements KernelType {
       matchProcessor.process(sim)
     })
 
-    return {
-      score: simulation.scores,
-      stats: simulation.stats
-    }
+    return prepareResults(simulation)
   }
 
   static init (): Kernel {

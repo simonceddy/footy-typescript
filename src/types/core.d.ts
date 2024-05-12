@@ -4,7 +4,7 @@ import { type PlayingField } from './geometry'
 import type MatchSimulation from '../core/MatchSimulation'
 import type TeamContainer from '../core/TeamContainer'
 import type Scoreboard from '../stats/Scoreboard'
-import { type StatKeeper } from './stats'
+import { type Statline } from './stats'
 
 export interface Process {
   run: () => void
@@ -30,6 +30,7 @@ export interface Clock {
 }
 
 export interface Match {
+  id: string
   clock: Clock
   homeTeam: Team
   awayTeam: Team
@@ -53,7 +54,13 @@ export interface MatchSettings {
   msPerQuarter?: number
 }
 
+export interface MatchStats {
+  homeTeam: Record<string, Statline>
+  awayTeam: Record<string, Statline>
+}
+
 export interface MatchResult {
+  victor: string | null
   score: Scoreboard
-  stats: StatKeeper
+  stats: MatchStats
 }

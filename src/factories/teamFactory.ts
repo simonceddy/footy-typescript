@@ -47,7 +47,7 @@ export default function teamFactory (
   attributes: TeamFactoryAttributes | undefined = undefined,
   options: TeamFactoryOptions | undefined = undefined
 ): Team {
-  const id = uuidv4()
+  const id = attributes?.id ?? uuidv4()
   // TODO clean up this
   const location = attributes !== undefined && typeof attributes.location === 'string'
     ? attributes.location

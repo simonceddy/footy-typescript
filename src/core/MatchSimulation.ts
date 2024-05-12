@@ -2,7 +2,7 @@ import type EventEmitter from 'events'
 import { type MatchSettings, type Match, type Clock } from '../types/core'
 import type CoordinatesDirectory from './CoordinatesDirectory'
 import { matchStates } from '../support'
-import { type Footy } from '../types/entities'
+import { type Player, type Footy } from '../types/entities'
 import { Sherrin } from '../entities'
 import PlayerAIDirectory from '../ai/PlayerAIDirectory'
 import { type StatKeeper as StatKeeperType } from '../types/stats'
@@ -40,7 +40,20 @@ export default class MatchSimulation {
     this.footy = new Sherrin()
     this.playerAI = playerAI ?? PlayerAIDirectory.init(this)
     this.stats = StatKeeper.init(this)
-    this.scores = new Scoreboard()
+    this.scores = new Scoreboard(this.matchup.homeTeam, this.matchup.awayTeam)
+  }
+
+  allPlayers (): Player[] {
+    return [
+      ...this.matchup.homeTeamPlayers.players,
+      ...this.matchup.awayTeamPlayers.players
+    ]
+  }
+
+  getPlayer (playerId: string): Player | null {
+    const players = this.allPlayers()
+    const player = players.find((p) => p.id === playerId)
+    return player ?? null
   }
 
   get clock (): Clock {

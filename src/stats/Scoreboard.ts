@@ -1,4 +1,7 @@
+import { type Team } from '../types/entities'
+
 interface Scoreline {
+  team?: Team
   behinds: number
   goals: number
 }
@@ -8,14 +11,16 @@ export default class Scoreboard {
 
   awayScore: Scoreline
 
-  constructor () {
+  constructor (homeTeam?: Team, awayTeam?: Team) {
     this.awayScore = {
       behinds: 0,
-      goals: 0
+      goals: 0,
+      team: homeTeam
     }
     this.homeScore = {
       behinds: 0,
-      goals: 0
+      goals: 0,
+      team: awayTeam
     }
   }
 

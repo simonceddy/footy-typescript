@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { v4 as uuidv4 } from 'uuid'
 import { shuffle } from 'lodash'
 import { type Matches, type Round, type Team } from '../types/entities'
 import Fixture from '../entities/Fixture'
@@ -68,6 +69,7 @@ export default function fixtureFactory (teams: Team[], rounds?: number, quiet: b
             })
           } else {
             season[k].matches.push({
+              id: uuidv4(),
               homeTeam,
               awayTeam
             })
