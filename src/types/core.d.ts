@@ -1,5 +1,5 @@
 import { type EventEmitter } from 'events'
-import { type PlayingList, type Team } from './entities'
+import { type Player, type PlayingList, type Team } from './entities'
 import { type PlayingField } from './geometry'
 import type MatchSimulation from '../core/MatchSimulation'
 import type TeamContainer from '../core/TeamContainer'
@@ -63,4 +63,19 @@ export interface MatchResult {
   victor: string | null
   score: Scoreboard
   stats: MatchStats
+}
+
+export interface TeamSchema {
+  team: Team
+  playingList: Player[]
+}
+
+export interface MatchSchema {
+  /**
+   * Unique Match ID
+   */
+  id: string
+  homeTeamContainer: TeamSchema
+  awayTeamContainer: TeamSchema
+  playingField: PlayingField
 }

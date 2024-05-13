@@ -3,20 +3,17 @@ import fs from 'fs'
 import path from 'path'
 // import Table from 'cli-table'
 // import PlayingList from './collections/PlayingList'
-import * as TJS from 'typescript-json-schema'
+// import * as TJS from 'typescript-json-schema'
 import { Kernel } from './core'
-import { fixtureFactory, leagueFactory } from './factories'
-import prepareMatchSimulation from './core/bootstrap/prepareMatchSimulation'
-import { matchToContainer } from './support'
-import EventEmitter from 'events'
+import { leagueFactory } from './factories'
 // import { playingFieldSVG, renderHTML } from './support/html'
 // import { type Player } from './types/entities'
 
-const program = TJS.getProgramFromFiles([path.resolve(__dirname, '../src/types/factories.d.ts')])
+// const program = TJS.getProgramFromFiles([path.resolve(__dirname, '../tsconfig.json')])
 
-const schema = TJS.generateSchema(program, 'MatchupFactoryAttributes')
+// const schema = TJS.generateSchema(program, 'MatchSchema')
 
-fs.writeFileSync(path.join(__dirname, '../storage/matchup-schema.json'), JSON.stringify(schema))
+// fs.writeFileSync(path.join(__dirname, '../storage/matchup-schema.json'), JSON.stringify(schema))
 
 const footy = Kernel.init()
 

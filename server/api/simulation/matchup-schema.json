@@ -1,285 +1,193 @@
 {
-  "type": "object",
-  "properties": {
-    "homeTeamAttributes": {
-      "$ref": "#/definitions/TeamFactoryAttributes"
-    },
-    "awayTeamAttributes": {
-      "$ref": "#/definitions/TeamFactoryAttributes"
-    },
-    "homePlayingList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Player"
-      }
-    },
-    "awayPlayingList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Player"
-      }
-    },
-    "playingFieldAttributes": {
-      "$ref": "#/definitions/PlayingFieldFactoryAttributes"
-    },
-    "playerId": {
-      "type": "string"
-    },
-    "attributes": {
-      "$ref": "#/definitions/Record<string,number>"
-    },
-    "team": {
-      "$ref": "#/definitions/Team"
-    },
-    "number": {
-      "type": "number"
-    },
-    "height": {
-      "type": "number"
-    },
-    "firstName": {
-      "type": "string"
-    },
-    "surname": {
-      "type": "string"
-    },
-    "nickname": {
-      "anyOf": [
-        {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        {
-          "type": "string"
-        }
-      ]
-    },
-    "teamName": {
-      "type": "string"
-    },
-    "location": {
-      "type": "string"
-    },
-    "shorthand": {
-      "type": "string"
-    },
-    "homeground": {
-      "$ref": "#/definitions/PlayingField"
-    },
-    "colour1": {
-      "type": "string"
-    },
-    "colour2": {
-      "type": "string"
-    },
-    "colour3": {
-      "type": "string"
-    }
-  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "TeamFactoryAttributes": {
-      "type": "object",
-      "properties": {
-        "teamName": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "shorthand": {
-          "type": "string"
-        },
-        "homeground": {
-          "$ref": "#/definitions/PlayingField"
-        },
-        "colour1": {
-          "type": "string"
-        },
-        "colour2": {
-          "type": "string"
-        },
-        "colour3": {
-          "type": "string"
-        }
-      }
-    },
-    "PlayingField": {
-      "type": "object",
-      "properties": {
-        "shape": {
-          "$ref": "#/definitions/Ellipse"
-        },
-        "yAxis": {
-          "type": "number"
-        },
-        "xAxis": {
-          "type": "number"
-        },
-        "center": {
-          "$ref": "#/definitions/Vector"
-        },
-        "radius": {
-          "$ref": "#/definitions/Vector"
-        },
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "Ellipse": {
-      "type": "object",
-      "properties": {
-        "center": {
-          "$ref": "#/definitions/Vector"
-        },
-        "radius": {
-          "$ref": "#/definitions/Vector"
-        },
-        "toString": {
-          "type": "object"
-        }
-      }
-    },
-    "Vector": {
-      "type": "object",
-      "properties": {
-        "x": {
-          "type": "number"
-        },
-        "y": {
-          "type": "number"
-        }
-      }
-    },
-    "Player": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "$ref": "#/definitions/PersonName"
-        },
-        "team": {
-          "$ref": "#/definitions/Team"
-        },
-        "attributes": {
-          "$ref": "#/definitions/PlayerAttributes"
-        },
-        "number": {
-          "type": "number"
-        },
-        "height": {
-          "type": "number"
-        },
-        "positions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PersonName": {
-      "type": "object",
-      "properties": {
-        "firstName": {
-          "type": "string"
-        },
-        "surname": {
-          "type": "string"
-        },
-        "nickname": {
-          "anyOf": [
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
+      "Ellipse": {
+          "properties": {
+              "center": {
+                  "$ref": "#/definitions/Vector"
+              },
+              "radius": {
+                  "$ref": "#/definitions/Vector"
+              },
+              "toString": {
+                  "type": "object"
               }
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "toString": {
+          },
           "type": "object"
-        }
-      }
-    },
-    "Team": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "shorthand": {
-          "type": "string"
-        },
-        "toString": {
+      },
+      "PersonName": {
+          "properties": {
+              "firstName": {
+                  "type": "string"
+              },
+              "nickname": {
+                  "anyOf": [
+                      {
+                          "items": {
+                              "type": "string"
+                          },
+                          "type": "array"
+                      },
+                      {
+                          "type": "string"
+                      }
+                  ]
+              },
+              "surname": {
+                  "type": "string"
+              },
+              "toString": {
+                  "type": "object"
+              }
+          },
           "type": "object"
-        },
-        "colours": {
-          "$ref": "#/definitions/TeamColours"
-        },
-        "homeground": {
-          "$ref": "#/definitions/PlayingField"
-        }
+      },
+      "Player": {
+          "properties": {
+              "attributes": {
+                  "$ref": "#/definitions/PlayerAttributes"
+              },
+              "height": {
+                  "type": "number"
+              },
+              "id": {
+                  "type": "string"
+              },
+              "name": {
+                  "$ref": "#/definitions/PersonName"
+              },
+              "number": {
+                  "type": "number"
+              },
+              "positions": {
+                  "items": {
+                      "type": "string"
+                  },
+                  "type": "array"
+              },
+              "team": {
+                  "$ref": "#/definitions/Team"
+              }
+          },
+          "type": "object"
+      },
+      "PlayerAttributes": {
+          "properties": {
+              "attributes": {
+                  "$ref": "#/definitions/Record<string,Attribute>"
+              }
+          },
+          "type": "object"
+      },
+      "PlayingField": {
+          "properties": {
+              "center": {
+                  "$ref": "#/definitions/Vector"
+              },
+              "name": {
+                  "type": "string"
+              },
+              "radius": {
+                  "$ref": "#/definitions/Vector"
+              },
+              "shape": {
+                  "$ref": "#/definitions/Ellipse"
+              },
+              "xAxis": {
+                  "type": "number"
+              },
+              "yAxis": {
+                  "type": "number"
+              }
+          },
+          "type": "object"
+      },
+      "Record<string,Attribute>": {
+          "type": "object"
+      },
+      "Team": {
+          "properties": {
+              "colours": {
+                  "$ref": "#/definitions/TeamColours"
+              },
+              "homeground": {
+                  "$ref": "#/definitions/PlayingField"
+              },
+              "id": {
+                  "type": "string"
+              },
+              "location": {
+                  "type": "string"
+              },
+              "name": {
+                  "type": "string"
+              },
+              "shorthand": {
+                  "type": [
+                      "null",
+                      "string"
+                  ]
+              },
+              "toString": {
+                  "type": "object"
+              }
+          },
+          "type": "object"
+      },
+      "TeamColours": {
+          "properties": {
+              "colour1": {
+                  "type": "string"
+              },
+              "colour2": {
+                  "type": "string"
+              },
+              "colour3": {
+                  "type": "string"
+              }
+          },
+          "type": "object"
+      },
+      "TeamSchema": {
+          "properties": {
+              "playingList": {
+                  "items": {
+                      "$ref": "#/definitions/Player"
+                  },
+                  "type": "array"
+              },
+              "team": {
+                  "$ref": "#/definitions/Team"
+              }
+          },
+          "type": "object"
+      },
+      "Vector": {
+          "properties": {
+              "x": {
+                  "type": "number"
+              },
+              "y": {
+                  "type": "number"
+              }
+          },
+          "type": "object"
       }
-    },
-    "TeamColours": {
-      "type": "object",
-      "properties": {
-        "colour1": {
-          "type": "string"
-        },
-        "colour2": {
-          "type": "string"
-        },
-        "colour3": {
-          "type": "string"
-        }
-      }
-    },
-    "PlayerAttributes": {
-      "type": "object",
-      "properties": {
-        "attributes": {
-          "$ref": "#/definitions/Record<string,Attribute>"
-        }
-      }
-    },
-    "Record<string,Attribute>": {
-      "type": "object"
-    },
-    "PlayingFieldFactoryAttributes": {
-      "type": "object",
-      "properties": {
-        "width": {
-          "type": "number"
-        },
-        "length": {
-          "type": "number"
-        },
-        "name": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        }
-      }
-    },
-    "Record<string,number>": {
-      "type": "object"
-    }
   },
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  "properties": {
+      "awayTeamContainer": {
+          "$ref": "#/definitions/TeamSchema"
+      },
+      "homeTeamContainer": {
+          "$ref": "#/definitions/TeamSchema"
+      },
+      "id": {
+          "description": "Unique Match ID",
+          "type": "string"
+      },
+      "playingField": {
+          "$ref": "#/definitions/PlayingField"
+      }
+  },
+  "type": "object"
 }

@@ -21,7 +21,6 @@ Current features include:
 - Scoring is too low in most simulations
 - The basis for a coordinates system for moving entities is in place but is currently not implemented. At present all entities stay in the same locations
 - Generation of attributes and position determination is rudimentary and often results in poor distribution of positions
-- Schema for matchup request data is based on the wrong interface... Whoops!
 - Still some bugs with simulating user submitted matchups
 - Various poorly optimised code and typescript rookie mistakes
 
@@ -83,7 +82,7 @@ The server expects the client entry point to be `client/index.html`
 
 A [simple react client](https://github.com/simonceddy/footy-client) can be cloned and built for the server. When built, move the resulting `client` folder from the client repo into this repo's root directory (the same directory that this readme file is located)
 
-The client currently only includes pages for viewing generated matchups and leagues. Simulation features will be added in the future.
+The client currently only includes pages for viewing generated matchups and leagues, with a basic simulation interface.
 
 ## Adding data to name generators
 
