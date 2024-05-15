@@ -5,6 +5,7 @@ import { type Vector as VectorType } from '../types/geometry'
 import { Vector } from '../geometry'
 import { getOpposingPosition, positions } from '../support'
 import { bpos, fpos, hbpos, hfpos, mpos, pos } from '../support/playerAI'
+import { random } from 'lodash'
 
 export default class PlayerAI implements PlayerAIType {
   isAwayPlayer: boolean
@@ -58,8 +59,10 @@ export default class PlayerAI implements PlayerAIType {
     ) {
       return false
     }
-    // TODO field awareness
-    return fpos.includes(this.ownPosition)
+    // TODO include coords and attributes in determination
+    return fpos.includes(this.ownPosition) ||
+      (random(1, 3) === 1 && hfpos.includes(this.ownPosition)) ||
+      (random(1, 7) === 1 && mpos.includes(this.ownPosition))
   }
 
   get ownPosition (): string | null {

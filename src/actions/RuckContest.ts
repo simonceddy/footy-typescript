@@ -29,7 +29,7 @@ export default class RuckContest implements Action {
   }
 
   process (): Action | null {
-    // TODO
+    // TODO use player attributes to determine outcomes
     if (rand(0, 10, false) === 10) {
       // determine if ruck infringement
       const freeWinner = rand(0, 1) === 0 ? this.homeRuck : this.awayRuck

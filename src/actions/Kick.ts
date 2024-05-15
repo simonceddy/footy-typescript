@@ -50,7 +50,7 @@ export default class Kick implements Action {
       return new BallInSpace(this.simulation)
     }
     const target: Player = this.ai.getTarget()
-    if (roll < 3) {
+    if (roll < 2) {
       // console.log(`nice kick to ${target.name.toString(true)}`)
       return new MarkingContest(this.simulation, target)
     }

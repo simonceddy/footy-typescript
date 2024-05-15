@@ -2,9 +2,9 @@ import type EventEmitter from 'events'
 import { type Action } from '../types/actions'
 import type MatchSimulation from '../core/MatchSimulation'
 import { matchStates } from '../support'
-import { rand } from '../helpers'
 import { type Player } from '../types/entities'
 import GainPossession from './GainPossession'
+import { random } from 'lodash'
 
 export default class BallInSpace implements Action {
   duration: number = 1000
@@ -12,6 +12,7 @@ export default class BallInSpace implements Action {
   static NAME: string = 'actions.ballinspace'
 
   constructor (public simulation: MatchSimulation) {
+    this.duration = random(8, 50) * 100
   }
 
   get eventEmitter (): EventEmitter {
@@ -38,7 +39,7 @@ export default class BallInSpace implements Action {
   process (): Action | null {
     // TODO put logic here
     // determine if contested
-    const roll = rand(1, 2)
+    const roll = random(1, 2)
     this.simulation.state = roll === 2 ? matchStates.BALL_IN_SPACE : matchStates.BALL_CONTESTED
 
     // TODO get closest players

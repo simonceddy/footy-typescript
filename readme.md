@@ -38,6 +38,7 @@ Current features include:
 - Use better caching for data used by generators
 - Pseudo parallel action generation and handling ideally allowing individual entities to have their own actions and thus move around the xy grid
 - General improvements and optimisations
+- Proper error handling - currently the app will just crash when encountering an error
 - Better typescripting as I learn more
 
 ## Requirements

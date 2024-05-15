@@ -89,12 +89,12 @@ const compareToTemplate = (attributes: Record<string, number>, template: Record<
 export default function determinePlayerPositions (player: PlayerAttributes, height: number): string[] {
   // const heightToRuck = height > 194
 
-  const strength = Number(player.attributes.strength?.value ?? 6)
-  const agility = Number(player.attributes.agility?.value ?? 5)
-  const speed = Number(player.attributes.speed?.value ?? 5)
-  const endurance = Number(player.attributes.endurance?.value ?? 5)
-  const skill = Number(player.attributes.skill?.value ?? 5)
-  const smarts = Number(player.attributes.smarts?.value ?? 5)
+  const strength = Number(player.attributes.strength ?? 6)
+  const agility = Number(player.attributes.agility ?? 5)
+  const speed = Number(player.attributes.speed ?? 5)
+  const endurance = Number(player.attributes.endurance ?? 5)
+  const skill = Number(player.attributes.skill ?? 5)
+  const smarts = Number(player.attributes.smarts ?? 5)
 
   const playerPositions: string[] = []
   positions.forEach((pos) => {

@@ -35,6 +35,7 @@ export interface PlayerFactoryAttributes extends PersonNameFactoryAttributes, Te
   number?: number
   height?: number
   id?: string
+  positions?: string[]
 }
 
 export interface PlayerFactoryOptions extends PersonNameFactoryOptions, TeamFactoryOptions, PlayerAttributeFactoryOptions {

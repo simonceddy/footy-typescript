@@ -13,7 +13,7 @@ export function setStartingPositions (match: Match, directory: CoordinatesDirect
   const homeCoords: PositionMap = determineStartingCoordinates(match.playingField)
   const awayCoords: PositionMap = determineStartingCoordinates(match.playingField, true)
 
-  positionKeys.forEach((pos, id) => {
+  positionKeys.forEach((pos) => {
     if (isVector(homeCoords[pos]) && match.homeTeamContainer.positionMap[pos] !== undefined) {
       directory.forPlayer(match.homeTeamContainer.positionMap[pos], awayCoords[pos])
     }

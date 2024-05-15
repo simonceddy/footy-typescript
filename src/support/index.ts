@@ -5,13 +5,15 @@ import { type Match } from '../types/core'
 import { type League, type MatchUp } from '../types/entities'
 import TeamContainer from '../core/TeamContainer'
 import { playingFieldFactory } from '../factories'
-
 import * as positionsSupport from './positions'
+import { positionTemplates, templateKeys } from './positionTemplates'
+
 export { default as KeyValuePair } from './KeyValuePair'
 export * as html from './html'
 export * as constants from './consts'
 export { default as validAttributes } from './validAttributes'
 export { default as getOpposingPosition } from './getOpposingPosition'
+export { default as getOverallRating } from './getOverallRating'
 
 export function matchToContainer (match: MatchUp, league: League, emitter?: EventEmitter): Match {
   const homeTeamList = league.teamLists[match.homeTeam.location]
@@ -34,7 +36,11 @@ export function matchToContainer (match: MatchUp, league: League, emitter?: Even
 
 export const positionKeys: string[] = Object.keys(positionsSupport)
 
-export const positions = positionsSupport
+export const positions = {
+  ...positionsSupport,
+  templates: positionTemplates,
+  templateKeys
+}
 
 export const matchStates = {
   RUCK_CONTEST: 'RUCK_CONTEST',

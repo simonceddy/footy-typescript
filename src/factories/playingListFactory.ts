@@ -12,7 +12,8 @@ export default function playingListFactory (
   options?: PlayingListFactoryOptions
 ): PlayingListType {
   // TODO verify player data
-  const totalPlayers = options?.totalPlayers ?? 23
+  // TODO apply positions before attributes - calculate attributes by position
+  const totalPlayers = options?.totalPlayers ?? 18
   const list = new PlayingList([], attributes?.team)
   const homeNums: number[] = generateNumbers()
 
@@ -25,7 +26,9 @@ export default function playingListFactory (
       nickname: player?.name?.nickname,
       team: attributes?.team,
       number: player?.number ?? homeNums[i],
-      height: player?.height
+      height: player?.height,
+      positions: player?.positions,
+      attributes: player?.attributes?.attributes
     }, {
       ...options,
       takenNicknames: [...list.players]

@@ -4,15 +4,16 @@ import { type Player as PlayerType } from '../types/entities'
 import { type PlayerFactoryAttributes, type PlayerFactoryOptions } from '../types/factories'
 import personNameFactory from './personNameFactory'
 import teamFactory from './teamFactory'
-import playerAttributesFactory from './playerAttributesFactory'
-import { rand } from '../helpers'
-import { type PlayerAttributes } from '../types/attributes'
-import determinePlayerPositions from '../support/determinePlayerPositions'
+import { rand, randomVal } from '../helpers'
+import { type PlayerAttributes as PlayerAttributesType } from '../types/attributes'
+import { getOverallRating, positions } from '../support'
+import { PlayerAttributes } from '../attributes'
+import { averageAttributes, fillAttributes, getAttributesForPosition } from '../support/positionAttributes'
 
-function getHeight (attributes: PlayerAttributes): number {
+function getHeight (attributes: PlayerAttributesType): number {
   const baseHeight = rand(177, 196) + (
-    typeof attributes.attributes.strength?.value === 'number'
-      ? rand(0, attributes.attributes.strength.value)
+    typeof attributes.attributes.strength === 'number'
+      ? rand(0, attributes.attributes.strength)
       : 0)
   if (baseHeight <= 183 && rand(0, 3) === 1) {
     return baseHeight - rand(1, 9)
@@ -28,9 +29,32 @@ export default function playerFactory (
   options?: PlayerFactoryOptions
 ): PlayerType {
   const id: string = attributes?.id ?? uuidv4()
-  const playerAttributes = playerAttributesFactory({ ...attributes, playerId: id }, options)
 
-  const cm = attributes?.height ?? Math.round(getHeight(playerAttributes))
+  const pos1 = attributes?.positions?.[0] !== undefined
+    ? attributes.positions[0]
+    : randomVal(Object.keys(positions.templates))
+
+  let pos2 = attributes?.positions?.[1] !== undefined
+    ? attributes.positions[1]
+    : randomVal(Object.keys(positions.templates))
+
+  while (pos1 === pos2) {
+    pos2 = randomVal(Object.keys(positions.templates))
+  }
+
+  const playerAttributes = new PlayerAttributes(
+    id,
+    attributes?.attributes ?? averageAttributes(
+      fillAttributes(getAttributesForPosition(pos1)),
+      fillAttributes(getAttributesForPosition(pos2))
+    )
+  )
+
+  playerAttributes.attributes.overall = getOverallRating(playerAttributes)
+
+  const cm: number = attributes?.height ??
+    playerAttributes.attributes.height ??
+    Math.round(getHeight(playerAttributes))
 
   if (attributes?.team !== undefined) {
     return new Player(
@@ -40,7 +64,7 @@ export default function playerFactory (
       attributes?.team,
       attributes?.number,
       cm,
-      determinePlayerPositions(playerAttributes, cm)
+      [pos1, pos2]
     )
   }
 
@@ -51,6 +75,6 @@ export default function playerFactory (
     options?.generateTeam === true ? teamFactory(attributes, options) : undefined,
     attributes?.number,
     cm,
-    determinePlayerPositions(playerAttributes, cm)
+    [pos1, pos2]
   )
 }

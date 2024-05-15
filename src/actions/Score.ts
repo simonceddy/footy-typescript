@@ -10,7 +10,7 @@ import KickIn from './KickIn'
 import RuckContest from './RuckContest'
 
 export default class Score implements Action {
-  duration: number = 0
+  duration: number = 300
 
   static NAME: string = 'actions.score'
 

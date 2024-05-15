@@ -11,7 +11,7 @@ import SetShot from './SetShot'
 import RunningShot from './RunningShot'
 
 export default class Disposal implements Action {
-  duration: number = 200
+  duration: number = 400
 
   static NAME: string = 'actions.disposal'
 

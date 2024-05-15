@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { random } from 'lodash'
 import type EventEmitter from 'events'
 import { type Action } from '../types/actions'
@@ -34,12 +35,16 @@ export default class MarkingContest implements Action {
   }
 
   process (): Action | null {
-    // TODO put logic here
     const opponent = this.ai.getOpponentOf(this.player)
     if (opponent === null) {
       throw new Error(`Could not locate opponent for ${this.player.name.toString(true)}`)
     }
+    const playerStrength = this.player.attributes?.attributes.strength ?? 5
+    const opponentStrength = opponent.attributes?.attributes.strength ?? 5
+    const playerMarking = this.player.attributes?.attributes.marking ?? 5
+    const opponentMarking = opponent.attributes?.attributes.marking ?? 5
     // determine outcome of marking contest
+    // TODO take into account player attributes
     const roll = random(1, 10, false)
     if (roll === 1) {
       return new InterceptMark(this.simulation, opponent)
