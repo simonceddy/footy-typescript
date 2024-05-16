@@ -63,6 +63,7 @@ export interface MatchResult {
   victor: string | null
   score: Scoreboard
   stats: MatchStats
+  id?: string
 }
 
 export interface TeamSchema {
@@ -78,4 +79,12 @@ export interface MatchSchema {
   homeTeamContainer: TeamSchema
   awayTeamContainer: TeamSchema
   playingField: PlayingField
+}
+
+export interface RoundSchema {
+  matches: MatchSchema[]
+}
+
+export interface SeasonSchema {
+  rounds: RoundSchema[]
 }

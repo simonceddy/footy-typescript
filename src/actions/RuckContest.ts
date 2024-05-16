@@ -7,6 +7,8 @@ import { matchStates, positions } from '../support'
 import { rand } from '../helpers'
 import Hitout from './Hitout'
 import FreeKick from './FreeKick'
+import { random } from 'lodash'
+import BallInSpace from './BallInSpace'
 
 export default class RuckContest implements Action {
   duration: number = 600
@@ -30,12 +32,20 @@ export default class RuckContest implements Action {
 
   process (): Action | null {
     // TODO use player attributes to determine outcomes
-    if (rand(0, 10, false) === 10) {
+    const homeRucking = this.homeRuck.attributes?.attributes.rucking ?? 5
+    const awayRucking = this.awayRuck.attributes?.attributes.rucking ?? 5
+    const homeRoll = Math.round(random(homeRucking, 20))
+    const awayRoll = Math.round(random(awayRucking, 20))
+    if (homeRoll === awayRoll) {
+      // no clear winner
+      return new BallInSpace(this.simulation)
+    }
+    if ((homeRoll > 19 || awayRoll > 19) && homeRoll !== awayRoll) {
       // determine if ruck infringement
-      const freeWinner = rand(0, 1) === 0 ? this.homeRuck : this.awayRuck
+      const freeWinner = homeRoll > awayRoll ? this.homeRuck : this.awayRuck
       return new FreeKick(this.simulation, freeWinner)
     }
-    const winner = rand(0, 1, false) === 1 ? this.awayRuck : this.homeRuck
+    const winner = awayRoll > homeRoll ? this.awayRuck : this.homeRuck
     // console.log(`hitout won by ${winner.name.toString(true)}`)
     return new Hitout(this.simulation, winner)
   }

@@ -1,4 +1,5 @@
 import { type Player } from '../types/entities'
+import { templateKeys } from './positionTemplates'
 import * as positions from './positions'
 
 export const playerPositionMap: Record<string, string[] | string> = {
@@ -74,6 +75,9 @@ export const teamMakeup = {
 export function canPlayInPosition (player: Player, position: string): boolean {
   const playerPos = player.positions
   if (playerPos !== undefined) {
+    if (position === positions.RUCK) {
+      return playerPos?.includes(templateKeys.RUCK)
+    }
     return playerPos.findIndex((pos) => playerPositionMap[pos]?.includes(position)) !== -1
   }
   return false

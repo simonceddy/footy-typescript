@@ -22,6 +22,7 @@ export default function prepareResults (simulation: MatchSimulation): MatchResul
   console.log(homeTotal, awayTotal)
   const isDraw = homeTotal === awayTotal
   const result: MatchResult = {
+    id: simulation.matchup.id,
     victor: isDraw ? null : (homeTotal > awayTotal ? homeTeam.id : awayTeam.id),
     score: simulation.scores,
     stats: {

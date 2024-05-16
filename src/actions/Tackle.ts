@@ -31,15 +31,16 @@ export default class Tackle implements Action {
   process (): Action | null {
     // TODO put logic here
     // determine outcome of tackle
-    const roll = random(0, 6)
-    if (roll === 5) {
+    const playerDefense = this.player.attributes?.attributes.defense ?? 5
+    const roll = random(playerDefense, 20)
+    if (roll > 18) {
       return new FreeKick(this.simulation, this.target)
     }
     this.eventEmitter.emit(this.name, this.simulation, this.player, this.target)
-    if (roll === 6) {
+    if (roll < 10) {
       return new FreeKick(this.simulation, this.player)
     }
-    if (roll > 2) {
+    if (roll < 15) {
       return new BallInSpace(this.simulation)
     }
     this.duration = 5000

@@ -40,17 +40,17 @@ export default class Kick implements Action {
   process (): Action | null {
     // determine target or kick to space
     this.simulation.state = matchStates.BALL_IN_FLIGHT
-
+    const playerKicking = this.player.attributes?.attributes.kicking ?? 5
     this.eventEmitter.emit(this.name, this.simulation, this.player)
-    const roll = rand(0, 4)
-    if (roll === 0) {
+    const roll = rand(playerKicking, 20)
+    if (roll < 10) {
       return new Turnover(this.simulation, this.player)
     }
-    if (roll === 4) {
+    if (roll < 15) {
       return new BallInSpace(this.simulation)
     }
     const target: Player = this.ai.getTarget()
-    if (roll < 2) {
+    if (roll < 18) {
       // console.log(`nice kick to ${target.name.toString(true)}`)
       return new MarkingContest(this.simulation, target)
     }

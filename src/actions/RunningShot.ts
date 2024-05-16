@@ -30,8 +30,10 @@ export default class RunningShot implements Action {
   process (): Action | null {
     // TODO put logic here
     // determine difficulty of shot - congestion, position, player attributes
-    const scoreRoll = random(0, 4)
-    if (scoreRoll === 0) {
+    const playerKicking = this.player.attributes?.attributes.kicking ?? 5
+    const playerScoring = this.player.attributes?.attributes.scoring ?? 5
+    const scoreRoll = random(playerKicking + playerScoring, 20)
+    if (scoreRoll < 12) {
       // out on the full - return free kick to opponent
       return new Turnover(this.simulation, this.player)
     }

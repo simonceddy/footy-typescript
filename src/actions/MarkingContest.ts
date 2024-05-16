@@ -8,6 +8,7 @@ import { type PlayerAI } from '../types/ai'
 import Mark from './Mark'
 import InterceptMark from './InterceptMark'
 import Spoil from './Spoil'
+import BallInSpace from './BallInSpace'
 
 export default class MarkingContest implements Action {
   duration: number = 200
@@ -45,13 +46,17 @@ export default class MarkingContest implements Action {
     const opponentMarking = opponent.attributes?.attributes.marking ?? 5
     // determine outcome of marking contest
     // TODO take into account player attributes
-    const roll = random(1, 10, false)
-    if (roll === 1) {
+    const playerRoll = random(playerMarking + playerStrength, 20, false)
+    const opponentRoll = random(opponentMarking + opponentStrength, 20, false)
+    if (opponentRoll > 18 && playerRoll < 18) {
       return new InterceptMark(this.simulation, opponent)
     }
-    if (roll < 7) {
+    if (opponentRoll > playerRoll) {
       return new Spoil(this.simulation, opponent)
     }
-    return new Mark(this.simulation, this.player)
+    if (playerRoll > 15 && opponentRoll < 15) {
+      return new Mark(this.simulation, this.player)
+    }
+    return new BallInSpace(this.simulation)
   }
 }

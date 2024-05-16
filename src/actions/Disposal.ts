@@ -43,7 +43,6 @@ export default class Disposal implements Action {
 
   process (): Action | null {
     // determine if scoring opportunity
-    // TODO perhaps move to another action?
     if (this.ai.canScore()) {
       // determine if set shot
       if (this.simulation.state === matchStates.BALL_IN_PROTECTED_POSSESSION ||

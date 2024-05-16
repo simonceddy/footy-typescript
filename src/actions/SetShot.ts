@@ -31,9 +31,11 @@ export default class SetShot implements Action {
   process (): Action | null {
     // TODO put logic here
     // move set shot logic here
+    const playerKicking = this.player.attributes?.attributes.kicking ?? 5
+    const playerScoring = this.player.attributes?.attributes.scoring ?? 5
+    const scoreRoll = random(playerKicking + playerScoring, 20)
     this.simulation.state = matchStates.SET_SHOT
-    const scoreRoll = random(0, 4)
-    if (scoreRoll === 0) {
+    if (scoreRoll < 11) {
       // out on the full - return free kick to opponent
       return new Turnover(this.simulation, this.player)
     }

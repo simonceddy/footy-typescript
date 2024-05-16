@@ -34,8 +34,10 @@ export default class Score implements Action {
     // determine if goal or behind
     // update scoreboard
     // update stats
-    const roll = rand(1, 2)
-    if (roll === 1) {
+    const playerKicking = this.player.attributes?.attributes.kicking ?? 5
+    const playerScoring = this.player.attributes?.attributes.scoring ?? 5
+    const roll = rand(playerKicking + playerScoring, 20)
+    if (roll < 16) {
       // behind
       // console.log(`${this.player.name.toString(true)} kicks a point`)
       this.eventEmitter.emit(BehindScored.NAME, this.simulation, this.player)

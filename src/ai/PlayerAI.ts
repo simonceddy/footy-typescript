@@ -60,9 +60,12 @@ export default class PlayerAI implements PlayerAIType {
       return false
     }
     // TODO include coords and attributes in determination
+    const playerScoring = this.player.attributes?.attributes.scoring ?? 0
+    const playerKicking = this.player.attributes?.attributes.kicking ?? 0
+    const mod = playerScoring + playerKicking
     return fpos.includes(this.ownPosition) ||
-      (random(1, 3) === 1 && hfpos.includes(this.ownPosition)) ||
-      (random(1, 7) === 1 && mpos.includes(this.ownPosition))
+      (random(mod, 20) > 9 && hfpos.includes(this.ownPosition)) ||
+      (random(mod, 30) > 18 && mpos.includes(this.ownPosition))
   }
 
   get ownPosition (): string | null {
