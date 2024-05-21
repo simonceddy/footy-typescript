@@ -5,7 +5,9 @@ import path from 'path'
 // import PlayingList from './collections/PlayingList'
 // import * as TJS from 'typescript-json-schema'
 import { Kernel } from './core'
-import { leagueFactory } from './factories'
+import { leagueFactory, fixtureFactory } from './factories'
+import { inFieldOfPlay } from './helpers/matchHelpers'
+import { random } from 'lodash'
 // import { playingFieldSVG, renderHTML } from './support/html'
 // import { type Player } from './types/entities'
 
@@ -22,8 +24,14 @@ console.log(footy.name, footy.version)
 const league = leagueFactory()
 console.log(league.name)
 
-// const fixture = fixtureFactory(Object.values(league.teams), 18, true)
-// const match1 = fixture.match(1, 1)
+const fixture = fixtureFactory(Object.values(league.teams), 18, true)
+const match1 = fixture.match(1, 1)
+if (match1?.homeTeam.homeground !== undefined) {
+  console.log(inFieldOfPlay(match1?.homeTeam.homeground, {
+    x: random(match1.homeTeam.homeground.xAxis),
+    y: random(match1.homeTeam.homeground.yAxis)
+  }), match1.homeTeam.homeground)
+}
 // if (match1 !== undefined) {
 //   const sim = prepareMatchSimulation(matchToContainer(match1, league, footy), footy)
 //   const result = footy.run(sim)
