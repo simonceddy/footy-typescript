@@ -27,10 +27,10 @@ console.log(league.name)
 const fixture = fixtureFactory(Object.values(league.teams), 18, true)
 const match1 = fixture.match(1, 1)
 if (match1?.homeTeam.homeground !== undefined) {
-  console.log(inFieldOfPlay(match1?.homeTeam.homeground, {
+  console.log(match1?.homeTeam.homeground.inFieldOfPlay({
     x: random(match1.homeTeam.homeground.xAxis),
     y: random(match1.homeTeam.homeground.yAxis)
-  }), match1.homeTeam.homeground)
+  }))
 }
 // if (match1 !== undefined) {
 //   const sim = prepareMatchSimulation(matchToContainer(match1, league, footy), footy)

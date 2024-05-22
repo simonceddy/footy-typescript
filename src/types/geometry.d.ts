@@ -42,4 +42,5 @@ export interface PlayingField {
   center: Vector
   radius: Vector
   name?: string
+  inFieldOfPlay: (coords: Vector) => boolean
 }

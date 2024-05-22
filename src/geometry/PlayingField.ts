@@ -1,3 +1,4 @@
+import { inFieldOfPlay } from '../helpers/matchHelpers'
 import { type PlayingField as PlayingFieldType, type Ellipse, type Vector } from '../types/geometry'
 
 export default class PlayingField implements PlayingFieldType {
@@ -16,5 +17,9 @@ export default class PlayingField implements PlayingFieldType {
 
   get radius (): Vector {
     return this.shape.radius
+  }
+
+  inFieldOfPlay (coords: Vector): boolean {
+    return inFieldOfPlay(this, coords)
   }
 }
