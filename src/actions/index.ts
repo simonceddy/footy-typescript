@@ -5,7 +5,6 @@ export { default as FreeKick } from './FreeKick'
 export { default as GainPossession } from './GainPossession'
 export { default as Handball } from './Handball'
 export { default as Hitout } from './Hitout'
-
 export { default as InitPlay } from './InitPlay'
 export { default as InterceptMark } from './InterceptMark'
 export { default as Kick } from './Kick'

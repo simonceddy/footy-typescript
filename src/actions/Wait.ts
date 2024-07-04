@@ -5,9 +5,7 @@ import type MatchSimulation from '../core/MatchSimulation'
 export default class Wait implements Action {
   static NAME: string = 'actions.wait'
 
-  duration: number = 500
-
-  constructor (public simulation: MatchSimulation) {
+  constructor (public simulation: MatchSimulation, public duration: number = 500) {
   }
 
   get eventEmitter (): EventEmitter {
