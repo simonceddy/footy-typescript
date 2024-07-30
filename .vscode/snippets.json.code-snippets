@@ -45,6 +45,7 @@
   },
   "event": {
     "prefix": "footy-event",
+    "scope": "typescript",
     "body": [
       "export default class ${1:${TM_FILENAME_BASE}} {",
       "\tstatic NAME: string = '${1:${TM_FILENAME_BASE/(.*)/${1:/upcase}/}}'\n",
